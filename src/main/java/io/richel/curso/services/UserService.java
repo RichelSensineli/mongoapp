@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.richel.curso.domain.User;
+import io.richel.curso.dto.UserDTO;
 import io.richel.curso.repositories.UserRepository;
 import io.richel.curso.services.exception.ObjectNotFoundException;
 
@@ -21,5 +22,13 @@ public class UserService {
 	
 	public User findById(String id) {
 		return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado!"));
+	}
+	
+	public User insert(User user) {
+		return repository.insert(user);
+	}
+	
+	public User fromDTO(UserDTO userDTO) {
+		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
 	}
 }
