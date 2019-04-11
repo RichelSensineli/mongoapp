@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import io.richel.curso.domain.Post;
 import io.richel.curso.domain.User;
 import io.richel.curso.dto.AuthorDTO;
+import io.richel.curso.dto.CommentDTO;
 import io.richel.curso.repositories.PostRepository;
 import io.richel.curso.repositories.UserRepository;
 
@@ -40,6 +41,13 @@ public class Instatiation implements CommandLineRunner{
 		
 		Post post1 = new Post(null, sdf.parse("20/08/2019"), "Partiu Viagem", "Vou viajar pra Sampa, abraços!", new AuthorDTO(maria));
 		Post post2 = new Post(null, sdf.parse("21/08/2019"), "Cheguei", "Sampa, cheguei!", new AuthorDTO(maria));
+		
+		CommentDTO c1 = new CommentDTO("Boa viagem!", sdf.parse("21/08/2019"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("21/08/2019"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Aeee!", sdf.parse("23/08/2019"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
